@@ -1,0 +1,21 @@
+syntax = "proto3";
+package contract;
+
+import "google/protobuf/any.proto";
+import "Error.proto";
+
+option go_package = "./grpc/pb";
+
+message Queue {
+    string name = 1;
+    optional bool durable = 2;
+    optional bool delete_unused = 3;
+    optional bool exclusive = 4;
+    optional bool no_wait = 5;
+    map<string, google.protobuf.Any> args = 6;
+}
+
+service QueueService {
+    rpc CreateQueue(Queue) returns (Error);
+    rpc DeleteQueue(Queue) returns (Error);
+}

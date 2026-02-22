@@ -1,0 +1,8 @@
+syntax = "proto3";
+package contract;
+
+option go_package = "./grpc/pb";
+
+message Error {
+    optional string error = 1; 
+};
