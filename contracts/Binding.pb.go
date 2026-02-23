@@ -23,8 +23,8 @@ const (
 
 type Binding struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Queue         *Queue                 `protobuf:"bytes,1,opt,name=queue,proto3" json:"queue,omitempty"`
-	Exchange      *Exchange              `protobuf:"bytes,2,opt,name=exchange,proto3" json:"exchange,omitempty"`
+	Queue         string                 `protobuf:"bytes,1,opt,name=queue,proto3" json:"queue,omitempty"`
+	Exchange      string                 `protobuf:"bytes,2,opt,name=exchange,proto3" json:"exchange,omitempty"`
 	RoutingKey    string                 `protobuf:"bytes,3,opt,name=routing_key,json=routingKey,proto3" json:"routing_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -60,18 +60,18 @@ func (*Binding) Descriptor() ([]byte, []int) {
 	return file_Binding_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Binding) GetQueue() *Queue {
+func (x *Binding) GetQueue() string {
 	if x != nil {
 		return x.Queue
 	}
-	return nil
+	return ""
 }
 
-func (x *Binding) GetExchange() *Exchange {
+func (x *Binding) GetExchange() string {
 	if x != nil {
 		return x.Exchange
 	}
-	return nil
+	return ""
 }
 
 func (x *Binding) GetRoutingKey() string {
@@ -85,10 +85,10 @@ var File_Binding_proto protoreflect.FileDescriptor
 
 const file_Binding_proto_rawDesc = "" +
 	"\n" +
-	"\rBinding.proto\x12\bcontract\x1a\vError.proto\x1a\x0eExchange.proto\x1a\vQueue.proto\"\x81\x01\n" +
-	"\aBinding\x12%\n" +
-	"\x05queue\x18\x01 \x01(\v2\x0f.contract.QueueR\x05queue\x12.\n" +
-	"\bexchange\x18\x02 \x01(\v2\x12.contract.ExchangeR\bexchange\x12\x1f\n" +
+	"\rBinding.proto\x12\bcontract\x1a\vError.proto\"\\\n" +
+	"\aBinding\x12\x14\n" +
+	"\x05queue\x18\x01 \x01(\tR\x05queue\x12\x1a\n" +
+	"\bexchange\x18\x02 \x01(\tR\bexchange\x12\x1f\n" +
 	"\vrouting_key\x18\x03 \x01(\tR\n" +
 	"routingKey2j\n" +
 	"\x0eBindingService\x12*\n" +
@@ -109,23 +109,19 @@ func file_Binding_proto_rawDescGZIP() []byte {
 
 var file_Binding_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_Binding_proto_goTypes = []any{
-	(*Binding)(nil),  // 0: contract.Binding
-	(*Queue)(nil),    // 1: contract.Queue
-	(*Exchange)(nil), // 2: contract.Exchange
-	(*Error)(nil),    // 3: contract.Error
+	(*Binding)(nil), // 0: contract.Binding
+	(*Error)(nil),   // 1: contract.Error
 }
 var file_Binding_proto_depIdxs = []int32{
-	1, // 0: contract.Binding.queue:type_name -> contract.Queue
-	2, // 1: contract.Binding.exchange:type_name -> contract.Exchange
-	0, // 2: contract.BindingService.Bind:input_type -> contract.Binding
-	0, // 3: contract.BindingService.Unbind:input_type -> contract.Binding
-	3, // 4: contract.BindingService.Bind:output_type -> contract.Error
-	3, // 5: contract.BindingService.Unbind:output_type -> contract.Error
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	0, // 0: contract.BindingService.Bind:input_type -> contract.Binding
+	0, // 1: contract.BindingService.Unbind:input_type -> contract.Binding
+	1, // 2: contract.BindingService.Bind:output_type -> contract.Error
+	1, // 3: contract.BindingService.Unbind:output_type -> contract.Error
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
+	0, // [0:0] is the sub-list for extension type_name
+	0, // [0:0] is the sub-list for extension extendee
+	0, // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_Binding_proto_init() }
@@ -134,8 +130,6 @@ func file_Binding_proto_init() {
 		return
 	}
 	file_Error_proto_init()
-	file_Exchange_proto_init()
-	file_Queue_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

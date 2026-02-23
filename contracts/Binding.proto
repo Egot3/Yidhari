@@ -2,14 +2,12 @@ syntax = "proto3";
 package contract;
 
 import "Error.proto";
-import "Exchange.proto";
-import "Queue.proto";
 
 option go_package = "./grpc/pb";
 
 message Binding {
-    Queue queue = 1;
-    Exchange exchange = 2;
+    string queue = 1;
+    string exchange = 2;
     string routing_key = 3;
 }
 
