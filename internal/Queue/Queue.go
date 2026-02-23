@@ -3,6 +3,7 @@ package queue
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 
 	pb "github.com/Egot3/Yidhari/contracts"
@@ -12,10 +13,12 @@ import (
 
 type QueueServer struct {
 	pb.UnimplementedQueueServiceServer
-	queuesCancel map[string]func() error
+	QueuesCancel map[string]func() error
 }
 
 func (s *QueueServer) CreateQueue(ctx context.Context, req *pb.Queue) (*pb.Error, error) {
+	log.Println("Connection to queue")
+
 	e := "queue created successfully"
 	conn, err := diacon.Connect(diacon.RabbitMQConfiguration{
 		URL:  os.Getenv("URL"),
@@ -60,13 +63,13 @@ func (s *QueueServer) CreateQueue(ctx context.Context, req *pb.Queue) (*pb.Error
 		}, err
 	}
 
-	s.queuesCancel[q.Name] = func() error {
+	s.QueuesCancel[q.Name] = func() error {
 		dead := ch.IsClosed()
 		if dead {
 			return fmt.Errorf("Connection is closed!")
 		}
 		err = queues.DeleteQueue(ch, qStruct)
-		delete(s.queuesCancel, q.Name)
+		delete(s.QueuesCancel, q.Name)
 		return err
 	}
 
@@ -78,7 +81,7 @@ func (s *QueueServer) CreateQueue(ctx context.Context, req *pb.Queue) (*pb.Error
 func (s *QueueServer) DeleteQueue(ctx context.Context, req *pb.Queue) (*pb.Error, error) {
 	e := "queue deleted successfully"
 
-	cancel, exists := s.queuesCancel[req.Name]
+	cancel, exists := s.QueuesCancel[req.Name]
 
 	if !exists {
 		e = "queue doesn't exist"

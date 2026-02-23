@@ -12,7 +12,7 @@ import (
 
 type BindingServer struct {
 	pb.UnimplementedBindingServiceServer
-	bindCancel map[string]func() error
+	BindCancel map[string]func() error
 }
 
 func (s *BindingServer) Bind(ctx context.Context, req *pb.Binding) (*pb.Error, error) {
@@ -55,13 +55,13 @@ func (s *BindingServer) Bind(ctx context.Context, req *pb.Binding) (*pb.Error, e
 		}, err
 	}
 
-	s.bindCancel[req.Queue+"|"+req.Exchange+"|"+req.RoutingKey] = func() error {
+	s.BindCancel[req.Queue+"|"+req.Exchange+"|"+req.RoutingKey] = func() error {
 		alive := psch.Alive()
 		if !alive {
 			return fmt.Errorf("Connection is closed!")
 		}
 		err = psch.Unbind(bStruct)
-		delete(s.bindCancel, req.Queue+"|"+req.Exchange+"|"+req.RoutingKey)
+		delete(s.BindCancel, req.Queue+"|"+req.Exchange+"|"+req.RoutingKey)
 		return err
 	}
 
@@ -73,7 +73,7 @@ func (s *BindingServer) Bind(ctx context.Context, req *pb.Binding) (*pb.Error, e
 func (s *BindingServer) Unbind(ctx context.Context, req *pb.Binding) (*pb.Error, error) {
 	e := "unbinded successfully"
 
-	cancel, exists := s.bindCancel[req.Queue+"|"+req.Exchange+"|"+req.RoutingKey]
+	cancel, exists := s.BindCancel[req.Queue+"|"+req.Exchange+"|"+req.RoutingKey]
 
 	if !exists {
 		e = "binding doesn't exist"
