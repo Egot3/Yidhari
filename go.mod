@@ -3,7 +3,7 @@ module github.com/Egot3/Yidhari
 go 1.26.0
 
 require (
-	github.com/Egot3/Zhao v0.0.2
+	github.com/Egot3/Zhao v0.0.3-0.20260223112034-32653f6c61e5
 	google.golang.org/grpc v1.79.1
 	google.golang.org/protobuf v1.36.11
 )

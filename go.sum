@@ -1,5 +1,7 @@
 github.com/Egot3/Zhao v0.0.2 h1:QUh7V3gSjX7DX26eKjW79TBzDX3u1dAB4OuUboO8050=
 github.com/Egot3/Zhao v0.0.2/go.mod h1:sENIrevc8Vix0mP2+zwkk/rUiYKOtX6PImFEj4fptpw=
+github.com/Egot3/Zhao v0.0.3-0.20260223112034-32653f6c61e5 h1:Jt65OJWepTuZ9jZp6fqtWc+8qdEkzC8wDT5xrdoJcJ4=
+github.com/Egot3/Zhao v0.0.3-0.20260223112034-32653f6c61e5/go.mod h1:sENIrevc8Vix0mP2+zwkk/rUiYKOtX6PImFEj4fptpw=
 github.com/cespare/xxhash/v2 v2.3.0 h1:UL815xU9SqsFlibzuggzjXhog7bL6oX9BbNZnL2UFvs=
 github.com/cespare/xxhash/v2 v2.3.0/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
 github.com/go-logr/logr v1.4.3 h1:CjnDlHq8ikf6E492q6eKboGOC0T8CDaOvkHCIg8idEI=
