@@ -10,15 +10,14 @@ import (
 	binding "github.com/Egot3/Yidhari/internal/Binding"
 	exchange "github.com/Egot3/Yidhari/internal/Exchange"
 	queue "github.com/Egot3/Yidhari/internal/Queue"
-	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalf("Error loading env") //ts is so dumb
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Fatalf("Error loading env") //ts is so dumb
+	// }
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", os.Getenv("OWN_PORT")))
 	if err != nil {
 		log.Fatalf("Error listening: %v", err)
